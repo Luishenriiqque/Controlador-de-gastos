@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#172033" />
+    <meta name="description" content="App para registrar gastos diarios e acompanhar seu dinheiro." />
+    <title>Controle de Gastos</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Controle pessoal</p>
+          <h1>Gastos do dia a dia</h1>
+          <p class="subtitle">Registre ifood, mercado, gasolina, uber e tudo que sair do bolso.</p>
+          <button class="install-button hidden" id="installButton" type="button">Instalar app</button>
+        </div>
+        <div class="hero-total">
+          <span>Total filtrado</span>
+          <strong id="totalAmount">R$ 0,00</strong>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <form id="expenseForm" class="panel form-panel">
+          <input type="hidden" id="expenseId" />
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Novo registro</p>
+              <h2 id="formTitle">Adicionar gasto</h2>
+            </div>
+            <button class="ghost-button hidden" id="cancelEditButton" type="button">Cancelar</button>
+          </div>
+
+          <label>
+            Descricao
+            <input id="title" name="title" placeholder="Ex: Ifood jantar" required />
+          </label>
+
+          <div class="two-columns">
+            <label>
+              Valor
+              <input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="35,90" required />
+            </label>
+            <label>
+              Data
+              <input id="date" name="date" type="date" required />
+            </label>
+          </div>
+
+          <div class="two-columns">
+            <label>
+              Categoria
+              <select id="category" name="category" required>
+                <option value="Comida">Comida</option>
+                <option value="Ifood">Ifood</option>
+                <option value="Mercado">Mercado</option>
+                <option value="Gasolina">Gasolina</option>
+                <option value="Uber">Uber</option>
+                <option value="Casa">Casa</option>
+                <option value="Saude">Saude</option>
+                <option value="Lazer">Lazer</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </label>
+            <label>
+              Pagamento
+              <select id="paymentMethod" name="paymentMethod">
+                <option value="Pix">Pix</option>
+                <option value="Debito">Debito</option>
+                <option value="Credito">Credito</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Observacoes
+            <textarea id="notes" name="notes" rows="3" placeholder="Opcional"></textarea>
+          </label>
+
+          <p id="formMessage" class="form-message" role="status"></p>
+          <button class="primary-button" type="submit">Salvar gasto</button>
+        </form>
+
+        <section class="content-stack">
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>Hoje</span>
+              <strong id="todayAmount">R$ 0,00</strong>
+            </article>
+            <article class="stat-card">
+              <span>Este mes</span>
+              <strong id="monthAmount">R$ 0,00</strong>
+            </article>
+            <article class="stat-card">
+              <span>Registros</span>
+              <strong id="countAmount">0</strong>
+            </article>
+          </div>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Historico</p>
+                <h2>Meus gastos</h2>
+              </div>
+            </div>
+
+            <div class="filters">
+              <label>
+                Categoria
+                <select id="filterCategory">
+                  <option value="Todas">Todas</option>
+                </select>
+              </label>
+              <label>
+                Mes
+                <input id="filterMonth" type="month" />
+              </label>
+              <label>
+                Busca
+                <input id="search" placeholder="ifood, uber..." />
+              </label>
+            </div>
+
+            <div id="expenseList" class="expense-list"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
